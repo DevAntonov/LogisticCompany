@@ -1,7 +1,7 @@
-package com.example.logisticcompany.controller;
+package controller;
 
-import com.example.logisticcompany.model.User;
-import com.example.logisticcompany.service.UserService;
+import model.User;
+import service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

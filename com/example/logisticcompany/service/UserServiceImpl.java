@@ -1,7 +1,7 @@
-package com.example.logisticcompany.service;
+package service;
 
-import com.example.logisticcompany.model.User;
-import com.example.logisticcompany.repository.UserRepository;
+import model.User;
+import repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

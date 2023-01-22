@@ -1,6 +1,6 @@
-package com.example.logisticcompany.repository;
+package repository;
 
-import com.example.logisticcompany.model.User;
+import model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
