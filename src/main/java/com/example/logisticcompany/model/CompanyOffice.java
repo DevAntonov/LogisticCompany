@@ -1,36 +1,37 @@
 package com.example.logisticcompany.model;
 
-import com.example.logisticcompany.repository.UserRepository;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.lang.NonNull;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "users")
+@Table(name = "companyOffice")
 @Getter
 @Setter
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "userID")
-public class User {
+        property = "companyOfficeId")
+public class CompanyOffice {
+
+    private String officeAddress;
+
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
-    private UUID userID;
+    private UUID companyOfficeId;
 
-    private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Company company;
 
-    @Column(nullable = false)
-    private String sex;
+    @ManyToMany(cascade = CascadeType.ALL)
+    private Set<Shipment> shipments;
 
-    private UserRole userRole;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Set<Employee> employees;
+
 }
-
-
