@@ -57,6 +57,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/account/**").hasAnyAuthority("USER")
                 .requestMatchers("/courier/**").hasAnyAuthority("COURIER")
                 .requestMatchers("/office/**").hasAnyAuthority("OFFICEWORKER")
+                .requestMatchers("/client/**").hasAnyAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and()
                 // form login

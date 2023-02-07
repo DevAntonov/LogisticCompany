@@ -7,6 +7,7 @@
   <h2>Welcome to Homepage</h2>
   <p sec:authorize="hasRole('ROLE_ANONYMOUS')">Text visible to anonymous.</p>
   <p sec:authorize="hasRole('USER')">Text visible to user.</p>
+  <p sec:authorize="hasRole('CLIENT')">Text visible to client.</p>
   <p sec:authorize="hasRole('ADMIN')">Text visible to admin.</p>
   <p sec:authorize="hasRole('OFFICEWORKER')">Text visible to office-worker.</p>
   <p sec:authorize="hasRole('COURIER')">Text visible to courier.</p>
@@ -20,8 +21,11 @@
   <div sec:authorize="isAuthenticated()">
     <p>Logged as: <span sec:authentication="name"></span></p>
     <p>Has role: <span sec:authentication="authorities"></span></p>
-    <p sec:authorize="hasAuthority('USER')"><a th:href="@{|/dashboard|}" th:text="'User Dashboard'"></a></p>
+    <p sec:authorize="hasAuthority('USER')"><a th:href="@{|/account/dashboard|}" th:text="'User Dashboard'"></a></p>
+    <p sec:authorize="hasAuthority('CLIENT')"><a th:href="@{|/client/dashboard|}" th:text="'Client Dashboard'"></a></p>
     <p sec:authorize="hasAuthority('ADMIN')"><a th:href="@{|/admin/dashboard|}" th:text="'Admin Dashboard'"></a></p>
+    <p sec:authorize="hasAuthority('COURIER')"><a th:href="@{|/courier/dashboard|}" th:text="'Courier Dashboard'"></a></p>
+    <p sec:authorize="hasAuthority('OFFICEWORKER')"><a th:href="@{|/office/dashboard|}" th:text="'Office-Worker Dashboard'"></a></p>
     <a th:href="@{/logout}">Log out</a>
   </div>
 

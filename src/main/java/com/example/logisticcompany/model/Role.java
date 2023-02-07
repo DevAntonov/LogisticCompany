@@ -2,6 +2,7 @@ package com.example.logisticcompany.model;
 
 public enum Role {
     OFFICEWORKER("OfficeWorker"),
+    CLIENT ("Client"),
     COURIER("Courier"),
     USER("User"),
     ADMIN("Admin");

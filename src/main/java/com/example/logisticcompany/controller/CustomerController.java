@@ -9,7 +9,8 @@ import com.example.logisticcompany.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -31,4 +32,5 @@ public class CustomerController {
     @GetMapping("/{customerId}")
     @ResponseStatus(HttpStatus.CREATED)
     public Optional<Customer> getCustomerById(@PathVariable UUID customerId) { return customerService.findById(customerId); }
+
 }

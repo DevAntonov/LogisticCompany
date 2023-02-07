@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @RequestMapping("/user")
 @RestController
-@Controller
+@Controller(value = "/account")
 public class UserController {
 
     @Autowired
@@ -23,8 +23,10 @@ public class UserController {
         userService.save(user);
     }
 
-    @RequestMapping(value = {"/user/dashboard"}, method = RequestMethod.GET)
-    public String homePage(){
-        return "user/dashboard";
+
+    @RequestMapping(value = {"/account/dashboard"}, method = RequestMethod.GET)
+    public String userHome(){
+        return "account/dashboard";
     }
+
 }
