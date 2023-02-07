@@ -4,14 +4,10 @@ import com.example.logisticcompany.repository.UserRepository;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.lang.NonNull;
+
 
 import java.util.UUID;
 
@@ -22,15 +18,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -48,26 +38,6 @@ public class User implements UserDetails {
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
     private UUID userID;
-    @SequenceGenerator(
-            name = "users_sequence",
-            sequenceName = "users_sequence",
-            allocationSize = 1
-    )
-
-
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "users_sequence"
-    )
-    @jakarta.persistence.Id
-    @jakarta.persistence.GeneratedValue(strategy = jakarta.persistence.GenerationType.SEQUENCE)
-    @jakarta.persistence.Column(name = "primeid", nullable = false)
-    private Long id;
-    private String name;
-
-    @Column(nullable = false)
-    private String sex;
-
 
 
     @NotNull(message = "First Name cannot be empty")

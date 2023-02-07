@@ -50,11 +50,13 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeRequests()
+        http.authorizeHttpRequests()
                 // URL matching for accessibility
                 .requestMatchers("/", "/login", "/register").permitAll()
                 .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
                 .requestMatchers("/account/**").hasAnyAuthority("USER")
+                .requestMatchers("/courier/**").hasAnyAuthority("COURIER")
+                .requestMatchers("/office/**").hasAnyAuthority("OFFICEWORKER")
                 .anyRequest().authenticated()
                 .and()
                 // form login

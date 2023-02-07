@@ -1,5 +1,6 @@
 package com.example.logisticcompany.service;
 
+import com.example.logisticcompany.model.Role;
 import com.example.logisticcompany.model.User;
 import com.example.logisticcompany.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void saveUser(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
-//        user.setRole(Role.USER);
         userRepository.save(user);
     }
 

@@ -1,8 +1,12 @@
 package com.example.logisticcompany.model;
 
 public enum Role {
+    OFFICEWORKER("OfficeWorker"),
+    COURIER("Courier"),
     USER("User"),
     ADMIN("Admin");
+
+
 
     private final String value;
 
