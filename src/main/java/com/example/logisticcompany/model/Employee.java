@@ -22,7 +22,7 @@ public class Employee {
     @Id
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
-    private UUID employeeID;
+    private UUID employeeId;
     private String name;
     private String email;
     private String phone;

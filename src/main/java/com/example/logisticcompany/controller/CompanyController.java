@@ -2,6 +2,7 @@ package com.example.logisticcompany.controller;
 
 import com.example.logisticcompany.model.Company;
 import com.example.logisticcompany.model.CompanyOffice;
+import com.example.logisticcompany.model.Employee;
 import com.example.logisticcompany.model.Shipment;
 import com.example.logisticcompany.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,9 @@ public class CompanyController {
     @GetMapping("/{companyId}/shipment/{shipmentId}")
     public Shipment getShipmentInfo(@PathVariable UUID companyId, @PathVariable UUID shipmentId) throws Exception { return companyService.getShipmentInfo(companyId, shipmentId);}
 
+    @PutMapping("/{companyId}/companyEmployee")
+    public void addCompanyEmployee(@PathVariable UUID companyId, @RequestBody Employee employee) throws Exception{
+        companyService.addEmployee(companyId, employee);
+    }
 }
 
