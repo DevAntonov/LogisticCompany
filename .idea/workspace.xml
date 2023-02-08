@@ -12,27 +12,16 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.6/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/config/CustomLoginSucessHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/config/CustomLoginSucessHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/config/WebSecurityConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/controller/CustomerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/controller/CustomerController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/controller/UserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/controller/UserController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/example/logisticcompany/model/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/auth/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/auth/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/templates/homepage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/templates/user/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CustomLoginSucessHandler.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/ClientController.class.uniqueId1" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CourierController.class.uniqueId0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/UserController.class.uniqueId2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/WebSecurityConfig.class.uniqueId0" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/config/CustomLoginSucessHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/config/CustomLoginSucessHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/CourierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/CourierController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/CustomerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/CustomerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/logisticcompany/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/auth/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/auth/login.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/auth/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/auth/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/homepage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/homepage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/account/dashboard.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +50,7 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -89,12 +79,15 @@
     "Repository.Attach.Sources": "false",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelOrder2": "2",
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
+    "RequestMappingsPanelWidth2": "75",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "C:/Users/Kristian.Kurtashev/Desktop/GropupProject/LogisticCompany/src/main/resources/templates/customer",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,6 +106,9 @@
       <recent name="C:\Users\Kristian.Kurtashev\Desktop\GropupProject\LogisticCompany\src\main\resources\templates\customer" />
       <recent name="C:\Users\Kristian.Kurtashev\Desktop\GropupProject\LogisticCompany\src\main\resources\templates\office-worker" />
       <recent name="C:\Users\Kristian.Kurtashev\Desktop\GropupProject\LogisticCompany\src\main\resources\templates\courier" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Kristian.Kurtashev\Desktop\GropupProject\LogisticCompany\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.LogisticCompanyApplication">
@@ -143,7 +139,7 @@
       <workItem from="1675756707887" duration="3387000" />
       <workItem from="1675760123533" duration="2103000" />
       <workItem from="1675798923923" duration="107000" />
-      <workItem from="1675799347814" duration="11537000" />
+      <workItem from="1675799347814" duration="15451000" />
     </task>
     <servers />
   </component>
