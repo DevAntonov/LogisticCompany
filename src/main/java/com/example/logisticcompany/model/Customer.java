@@ -10,8 +10,6 @@ import lombok.Setter;
 
 import java.util.*;
 
-import static org.springframework.boot.autoconfigure.amqp.RabbitRetryTemplateCustomizer.Target.SENDER;
-
 @Entity
 @Table(name = "customer")
 @Getter
@@ -21,6 +19,7 @@ import static org.springframework.boot.autoconfigure.amqp.RabbitRetryTemplateCus
         property = "customerId")
 public class Customer {
 
+    @Column(nullable = false)
     private String name;
 
     @Id
@@ -38,5 +37,4 @@ public class Customer {
                 joinColumns = @JoinColumn(name="customerId"),
                 inverseJoinColumns = @JoinColumn(name="shipmentId"))
     private Set<Shipment> customer_shipments = new HashSet<>();
-
 }

@@ -4,17 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.Hibernate;
 
-import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "employees")
 @Getter
 @Setter
-@ToString
-@RequiredArgsConstructor
+//@ToString
+//@RequiredArgsConstructor
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "employeeId")
@@ -23,16 +21,21 @@ public class Employee {
     @GeneratedValue
     @Column(columnDefinition = "uuid", updatable = false)
     private UUID employeeId;
+
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String phone;
-    private EmployeeRole role;
 
     @ManyToOne
     @JoinColumn(name = "company_company_id")
     private Company company;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "company_office_company_office_id")
-    private CompanyOffice companyOffice;
+    private Office office;
 }

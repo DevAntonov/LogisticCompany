@@ -1,13 +1,11 @@
 package com.example.logisticcompany.model;
 
-import com.example.logisticcompany.repository.CompanyRepository;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.lang.NonNull;
 
 import java.util.*;
 
@@ -29,15 +27,30 @@ public class Shipment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    @JoinColumn(name = "customerId")
     private Customer sender;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
     private Customer receiver;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private CompanyOffice officeFrom;
+    // трябва винаги да е сетнат; всяка пратка тръгва от офис.
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    private Office officeFrom;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private CompanyOffice officeTo;
+    // трябва винаги да е сетнат, дори и да имаме адрессТо(ако човек не приеме пратката си, да отиде до офис)
+    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    private Office officeTo;
+
+    private String addressTo;
+
+    @Column(nullable = false)
+    private Double price;
+
+    @Column(nullable = false)
+    private Double weight;
+
+    public enum status {
+        inTransit, arrived, received
+    };
 }

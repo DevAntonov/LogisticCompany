@@ -5,9 +5,7 @@ import com.example.logisticcompany.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
@@ -21,14 +19,14 @@ public class CompanyServiceImpl implements CompanyService{
     private ShipmentRepository shipmentRepository;
 
     @Autowired
-    private CompanyOfficeRepository companyOfficeRepository;
+    private OfficeRepository officeRepository;
+    private final EmployeeRepository employeeRepository;
 
-    @Autowired
-    private EmployeeRepository employeeRepository;
-
-    public CompanyServiceImpl(CompanyRepository companyRepository, CustomerRepository customerRepository){
+    public CompanyServiceImpl(CompanyRepository companyRepository, CustomerRepository customerRepository,
+                              EmployeeRepository employeeRepository){
         this.companyRepository=companyRepository;
         this.customerRepository=customerRepository;
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
@@ -65,10 +63,17 @@ public class CompanyServiceImpl implements CompanyService{
     public Company assignCustomerToCompany(UUID companyId, UUID customerId) throws Exception{
         Company company = companyRepository.findById(companyId).get();
         Customer customer = customerRepository.findById(customerId).get();
-        Set<Customer> customerSet = null;
-        customerSet = company.getCustomerList();
-        customerSet.add(customer);
-        company.setCustomerList(customerSet);
+        customer.getCompanies().add(company);
+        company.getCustomerList().add(customer);
+        return companyRepository.save(company);
+    }
+
+    @Override
+    public Company assignOfficeToCompany(UUID companyId, UUID officeId) throws Exception{
+        Company company = companyRepository.findById(companyId).get();
+        Office office = officeRepository.findById(officeId).get();
+        office.setCompany(company);
+        company.getOffices().add(office);
         return companyRepository.save(company);
     }
 
@@ -81,23 +86,24 @@ public class CompanyServiceImpl implements CompanyService{
         if(company.getAllShipments().contains(shipment)){
             throw new Exception("The provided shipment already exists in the system!");
         }
-        // iskam tuk da setna Sender i Receiver na shipmenta!
-        // нас не ни интересува в класа Customer, дали е сендър или ресийвър;
-        //тази информация ни е важна само в контекста на шипмента
-
         shipment.setSender(sender);
         shipment.setReceiver(receiver);
         shipment.setCompany(company);
+        shipment.getOfficeFrom().getShipments().add(shipment);
+        shipment.getOfficeFrom().setCompany(company);
+        shipment.getOfficeTo().setCompany(company);
+        shipment.getOfficeTo().getShipments().add(shipment);
+
+        calculatePrice(shipment);
         shipmentRepository.save(shipment);
 
         sender.getCustomer_shipments().add(shipment);
-        //sender.getCompanies().add(company);
-
-        //receiver.getCompanies().add(company);
         receiver.getCustomer_shipments().add(shipment);
         customerRepository.save(sender);
         customerRepository.save(receiver);
 
+        company.getOffices().add(shipment.getOfficeTo());
+        company.getOffices().add(shipment.getOfficeFrom());
         company.getCustomerList().add(sender);
         company.getCustomerList().add(receiver);
         company.getAllShipments().add(shipment);
@@ -116,32 +122,54 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public void addCompanyOffice(UUID companyId, CompanyOffice companyOffice) throws Exception {
-        Company company = companyRepository.findById(companyId).get();
-        company.getOffices().add(companyOffice);
-        companyOffice.setCompany(company);
-        companyRepository.save(company);
-        companyOfficeRepository.save(companyOffice);
-    }
-
-    @Override
-    public Set<CompanyOffice> getCompanyOffices(UUID companyId) throws Exception {
+    public Set<Office> getCompanyOffices(UUID companyId) throws Exception {
         Company company = companyRepository.findById(companyId).get();
         return company.getOffices();
     }
 
     @Override
-    public void addEmployee(UUID companyId, Employee employee) {
-        Company company = companyRepository.findById(companyId).get();
-        company.getEmployees().add(employee);
-        employee.setCompany(company);
-        companyRepository.save(company);
-        employeeRepository.save(employee);
+    public void calculatePrice(Shipment shipment) {
+        Double HIGH_PRICE = 20.0;
+        Double LOW_PRICE = 10.0;
+
+        if(shipment.getOfficeTo() == null || shipment.getAddressTo() != null){
+            // нямаме офисТО или имаме подаден точен адрес за доставка(аддрессТо) -> взимаме висока такса
+            shipment.setPrice(HIGH_PRICE*shipment.getWeight());
+        }else {
+            shipment.setPrice(LOW_PRICE * shipment.getWeight());
+        }
+        shipmentRepository.save(shipment);
     }
 
     @Override
-    public Set<Employee> getCompanyEmployees(UUID companyId) throws Exception {
+    public Company assignEmployeeToCompany(UUID companyId, UUID employeeId) {
         Company company = companyRepository.findById(companyId).get();
-        return company.getEmployees();
+        Employee employee = employeeRepository.findById(employeeId).get();
+        employee.setCompany(company);
+        company.getEmployees().add(employee);
+        return companyRepository.save(company);
+    }
+
+    @Override
+    public Set<Employee> getCompanyEmployees(UUID companyId) {
+        return getCompanyEmployees(companyId);
+    }
+
+    @Override
+    public Set<Customer> getCompanyCustomers(UUID companyId) {
+        Set<Customer> customers = new HashSet<>();
+
+        List<Customer> allCustomers = customerRepository.findAll();
+
+        for (Customer customer : allCustomers) {
+            Set<Company> customerCompanies = customer.getCompanies();
+            for (Company company : customerCompanies) {
+                if (company.getCompanyId().equals(companyId)) {
+                    customers.add(customer);
+                }
+            }
+        }
+
+        return customers;
     }
 }
