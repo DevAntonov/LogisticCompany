@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:action="@{/office/customer}" th:object="${customer}" method="post">
+        <h3>Add Customer</h3>
+        <input type="text" th:field="*{customerName}" placeholder="Customer Name" /> <br/><br/>
+        <button type="submit">Add customer</button> | <a th:href="@{|/office/dashboard|}" th:text="'Dashboard'"></a>
+    </form>
+</body>
+</html>
