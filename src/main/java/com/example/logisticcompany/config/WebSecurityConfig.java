@@ -57,7 +57,7 @@ public class WebSecurityConfig {
                 .requestMatchers("/account/**").hasAnyAuthority("USER")
                 .requestMatchers("/courier/**").hasAnyAuthority("COURIER")
                 .requestMatchers("/office/**").hasAnyAuthority("OFFICEWORKER")
-                .requestMatchers("/client/**").hasAnyAuthority("CLIENT")
+                .requestMatchers("/client/**", "/customer/**").hasAnyAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and()
                 // form login
@@ -84,7 +84,7 @@ public class WebSecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/css/**", "/webjars/**");
+        return (web) -> web.ignoring().requestMatchers("/images/**", "/js/**", "/css/**", "/webjars/**", "/company/**" , "/company");
     }
 
 }
