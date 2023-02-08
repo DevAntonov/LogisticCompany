@@ -54,10 +54,10 @@ public class WebSecurityConfig {
                 // URL matching for accessibility
                 .requestMatchers("/", "/login", "/register").permitAll()
                 .requestMatchers("/admin/**").hasAnyAuthority("ADMIN")
-                .requestMatchers("/account/**").hasAnyAuthority("USER")
+                .requestMatchers("/client/**", "/customer/**").hasAnyAuthority("CLIENT")
+                .requestMatchers("/user/**").hasAnyAuthority("USER")
                 .requestMatchers("/courier/**").hasAnyAuthority("COURIER")
                 .requestMatchers("/office/**").hasAnyAuthority("OFFICEWORKER")
-                .requestMatchers("/client/**", "/customer/**").hasAnyAuthority("CLIENT")
                 .anyRequest().authenticated()
                 .and()
                 // form login

@@ -23,10 +23,13 @@ public class UserController {
         userService.save(user);
     }
 
-
     @RequestMapping(value = {"/account/dashboard"}, method = RequestMethod.GET)
     public String userHome(){
         return "account/dashboard";
     }
 
+    @RequestMapping(value = {"/user/dashboard"}, method = RequestMethod.GET)
+    public String homePage(){
+        return "user/dashboard";
+    }
 }

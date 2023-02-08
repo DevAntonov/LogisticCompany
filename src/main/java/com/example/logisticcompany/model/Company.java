@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
+
 
 import java.util.*;
 
@@ -47,6 +49,23 @@ public class Company {
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Employee> employees;
 
+    public String getCompanyName() {
+        return companyName;
+    }
 
+    public UUID getCompanyId() {
+        return companyId;
+    }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "companyId=" + companyId +
+                ", companyName='" + companyName + '\'' +
+                ", customerList=" + customerList +
+                ", allShipments=" + allShipments +
+                ", offices=" + offices +
+                ", employees=" + employees +
+                '}';
+    }
 }

@@ -4,6 +4,7 @@ import com.example.logisticcompany.model.Company;
 import com.example.logisticcompany.model.Employee;
 import com.example.logisticcompany.model.Office;
 import com.example.logisticcompany.model.Shipment;
+import com.example.logisticcompany.model.*;
 
 import java.util.Optional;
 import java.util.Set;
@@ -38,4 +39,6 @@ public interface CompanyService {
     public Company assignEmployeeToCompany(UUID companyId, UUID employeeId);
 
     public Set<Employee> getCompanyEmployees(UUID companyId);
+
+    public Set<Customer> getCompanyCustomers(UUID companyId);
 }

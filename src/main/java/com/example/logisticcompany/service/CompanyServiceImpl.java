@@ -5,9 +5,11 @@ import com.example.logisticcompany.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
+import java.util.*;
 
 @Service
 public class CompanyServiceImpl implements CompanyService{
@@ -155,5 +157,23 @@ public class CompanyServiceImpl implements CompanyService{
     @Override
     public Set<Employee> getCompanyEmployees(UUID companyId) {
         return getCompanyEmployees(companyId);
+    }
+
+    @Override
+    public Set<Customer> getCompanyCustomers(UUID companyId) {
+        Set<Customer> customers = new HashSet<>();
+
+        List<Customer> allCustomers = customerRepository.findAll();
+
+        for (Customer customer : allCustomers) {
+            Set<Company> customerCompanies = customer.getCompanies();
+            for (Company company : customerCompanies) {
+                if (company.getCompanyId().equals(companyId)) {
+                    customers.add(customer);
+                }
+            }
+        }
+
+        return customers;
     }
 }

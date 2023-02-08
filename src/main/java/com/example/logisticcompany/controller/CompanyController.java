@@ -8,7 +8,9 @@ import com.example.logisticcompany.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import com.example.logisticcompany.model.*;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -27,10 +29,10 @@ public class CompanyController {
     @ResponseStatus(HttpStatus.CREATED)
     public void addCompany(@RequestBody Company company) { companyService.save(company); }
 
-    @GetMapping("/{companyId}")
-    public void getCompanyById(@PathVariable UUID companyId) { companyService.findById(companyId);}
-
     @DeleteMapping("/{companyId}")
+    public Optional<Company> getCompanyById(@PathVariable UUID companyId) { return companyService.findById(companyId);}
+
+    @GetMapping("delete/{companyId}")
     public void deleteCompanyById(@PathVariable UUID companyId) { companyService.deleteById(companyId);}
 
     @DeleteMapping("/{company}")
@@ -70,6 +72,9 @@ public class CompanyController {
 
     @GetMapping("/{companyId}/shipment/{shipmentId}")
     public Shipment getShipmentInfo(@PathVariable UUID companyId, @PathVariable UUID shipmentId) throws Exception { return companyService.getShipmentInfo(companyId, shipmentId);}
-
+    @GetMapping("/{companyId}/customer")
+    public Set<Customer> getCompanyCustomers(@PathVariable UUID companyId) throws Exception{
+        return companyService.getCompanyCustomers(companyId);
+    }
 }
 
