@@ -13,29 +13,32 @@ class OfficeTest {
 
     @Test
     void testConstructor() {
-        // Arrange and Act
-        Office actualOffice = new Office();
+        // Arrange
+        UUID companyId = UUID.randomUUID();
         Company company = new Company();
-        company.setAllShipments(new HashSet<>());
-        company.setCompanyId(UUID.randomUUID());
+        company.setCompanyId(companyId);
         company.setCompanyName("kompaniq");
+        company.setAllShipments(new HashSet<>());
         company.setCustomerList(new HashSet<>());
         company.setEmployees(new HashSet<>());
         company.setOffices(new HashSet<>());
 
-        actualOffice.setCompany(company);
-        UUID randomUUIDResult = UUID.randomUUID();
+        UUID officeId = UUID.randomUUID();
+        String officeAddress = "ulica 1";
+        Set<Shipment> shipments = new HashSet<>();
 
-        actualOffice.setCompanyOfficeId(randomUUIDResult);
-        actualOffice.setOfficeAddress("ulica 1");
-        HashSet<Shipment> shipmentSet = new HashSet<>();
-        actualOffice.setShipments(shipmentSet);
+        // Act
+        Office actualOffice = new Office();
+        actualOffice.setCompany(company);
+        actualOffice.setCompanyOfficeId(officeId);
+        actualOffice.setOfficeAddress(officeAddress);
+        actualOffice.setShipments(shipments);
 
         // Assert
         assertSame(company, actualOffice.getCompany());
-        assertSame(randomUUIDResult, actualOffice.getCompanyOfficeId());
-        assertEquals("ulica 1", actualOffice.getOfficeAddress());
-        assertSame(shipmentSet, actualOffice.getShipments());
+        assertSame(officeId, actualOffice.getCompanyOfficeId());
+        assertEquals(officeAddress, actualOffice.getOfficeAddress());
+        assertSame(shipments, actualOffice.getShipments());
     }
 }
 
