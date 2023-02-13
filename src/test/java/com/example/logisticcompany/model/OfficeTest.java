@@ -14,31 +14,66 @@ class OfficeTest {
     @Test
     void testConstructor() {
         // Arrange
-        UUID companyId = UUID.randomUUID();
         Company company = new Company();
-        company.setCompanyId(companyId);
-        company.setCompanyName("kompaniq");
         company.setAllShipments(new HashSet<>());
+        company.setCompanyId(UUID.randomUUID());
+        company.setCompanyName("kompaniq");
         company.setCustomerList(new HashSet<>());
         company.setEmployees(new HashSet<>());
         company.setOffices(new HashSet<>());
 
-        UUID officeId = UUID.randomUUID();
+        UUID randomUUIDResult = UUID.randomUUID();
         String officeAddress = "ulica 1";
-        Set<Shipment> shipments = new HashSet<>();
+        Set<Shipment> shipmentSet = new HashSet<>();
 
         // Act
         Office actualOffice = new Office();
         actualOffice.setCompany(company);
-        actualOffice.setCompanyOfficeId(officeId);
+        actualOffice.setCompanyOfficeId(randomUUIDResult);
         actualOffice.setOfficeAddress(officeAddress);
-        actualOffice.setShipments(shipments);
+        actualOffice.setShipments(shipmentSet);
 
         // Assert
         assertSame(company, actualOffice.getCompany());
-        assertSame(officeId, actualOffice.getCompanyOfficeId());
+    }
+
+    @Test
+    void testConstructor_CompanyOfficeId() {
+        // Arrange
+        UUID randomUUIDResult = UUID.randomUUID();
+
+        // Act
+        Office actualOffice = new Office();
+        actualOffice.setCompanyOfficeId(randomUUIDResult);
+
+        // Assert
+        assertSame(randomUUIDResult, actualOffice.getCompanyOfficeId());
+    }
+
+    @Test
+    void testConstructor_OfficeAddress() {
+        // Arrange
+        String officeAddress = "ulica 1";
+
+        // Act
+        Office actualOffice = new Office();
+        actualOffice.setOfficeAddress(officeAddress);
+
+        // Assert
         assertEquals(officeAddress, actualOffice.getOfficeAddress());
-        assertSame(shipments, actualOffice.getShipments());
+    }
+
+    @Test
+    void testConstructor_Shipments() {
+        // Arrange
+        Set<Shipment> shipmentSet = new HashSet<>();
+
+        // Act
+        Office actualOffice = new Office();
+        actualOffice.setShipments(shipmentSet);
+
+        // Assert
+        assertSame(shipmentSet, actualOffice.getShipments());
     }
 }
 

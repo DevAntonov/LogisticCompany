@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.example.logisticcompany.model.OfficeTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2023-02-13T21:13:59" hostname="VIKTORG14" time="0.023">
+<testsuite name="com.example.logisticcompany.model.OfficeTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2023-02-13T21:22:01" hostname="VIKTORG14" time="0.032">
   <properties/>
-  <testcase name="testConstructor()" classname="com.example.logisticcompany.model.OfficeTest" time="0.023"/>
+  <testcase name="testConstructor_withValidInput_shouldSetShipments()" classname="com.example.logisticcompany.model.OfficeTest" time="0.021"/>
+  <testcase name="testConstructor_withValidInput_shouldCreateOfficeWithExpectedValues()" classname="com.example.logisticcompany.model.OfficeTest" time="0.003"/>
+  <testcase name="testConstructor_withValidInput_shouldSetOfficeAddress()" classname="com.example.logisticcompany.model.OfficeTest" time="0.002"/>
+  <testcase name="testConstructor_withValidInput_shouldSetCompanyOfficeId()" classname="com.example.logisticcompany.model.OfficeTest" time="0.001"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
