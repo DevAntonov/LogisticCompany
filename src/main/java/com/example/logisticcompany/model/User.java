@@ -59,7 +59,7 @@ public class User implements UserDetails {
     private String password;
 
     @Column(name = "mobile", unique = true)
-    @Length(min = 10, message = "Password should be atleast 10 number long")
+    @Length(min = 10, message = "Mobile should be atleast 10 number long")
     private String mobile;
 
     @CreationTimestamp
