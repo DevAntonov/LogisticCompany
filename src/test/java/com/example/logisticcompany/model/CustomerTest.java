@@ -13,22 +13,60 @@ import org.junit.jupiter.api.Test;
 class CustomerTest {
 
     @Test
-    void testConstructor() {
-        // Arrange and Act
-        Customer actualCustomer = new Customer();
-        HashSet<Company> companySet = new HashSet<>();
-        actualCustomer.setCompanies(companySet);
-        UUID randomUUIDResult = UUID.randomUUID();
-        actualCustomer.setCustomerId(randomUUIDResult);
-        HashSet<Shipment> shipmentSet = new HashSet<>();
-        actualCustomer.setCustomer_shipments(shipmentSet);
-        actualCustomer.setName("Pesho");
+    @DisplayName("Test get and set companies")
+    void testGetAndSetCompanies() {
+        // Arrange
+        Customer customer = new Customer();
+        Set<Company> expectedCompanies = new HashSet<>();
+
+        // Act
+        customer.setCompanies(expectedCompanies);
 
         // Assert
-        assertSame(companySet, actualCustomer.getCompanies());
-        assertSame(randomUUIDResult, actualCustomer.getCustomerId());
-        assertSame(shipmentSet, actualCustomer.getCustomer_shipments());
-        assertEquals("Pesho", actualCustomer.getName());
+        assertSame(expectedCompanies, customer.getCompanies());
+    }
+
+    @Test
+    @DisplayName("Test get and set customer ID")
+    void testGetAndSetCustomerId() {
+        // Arrange
+        Customer customer = new Customer();
+        UUID expectedCustomerId = UUID.randomUUID();
+
+        // Act
+        customer.setCustomerId(expectedCustomerId);
+
+        // Assert
+        assertSame(expectedCustomerId, customer.getCustomerId());
+    }
+
+    @Test
+    @DisplayName("Test get and set customer shipments")
+    void testGetAndSetCustomerShipments() {
+        // Arrange
+        Customer customer = new Customer();
+        Set<Shipment> expectedShipments = new HashSet<>();
+
+        // Act
+        customer.setCustomer_shipments(expectedShipments);
+
+        // Assert
+        assertSame(expectedShipments, customer.getCustomer_shipments());
+    }
+
+    @Test
+    @DisplayName("Test get and set customer name")
+    void testGetAndSetName() {
+        // Arrange
+        Customer customer = new Customer();
+        String expectedName = "Pesho";
+
+        // Act
+        customer.setName(expectedName);
+
+        // Assert
+        assertEquals(expectedName, customer.getName());
     }
 }
+
 

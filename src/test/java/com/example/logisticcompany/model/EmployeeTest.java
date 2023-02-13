@@ -6,50 +6,111 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import java.util.HashSet;
 import java.util.UUID;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class EmployeeTest {
 
     @Test
-    void testConstructor() {
-        // Arrange and Act
+    @DisplayName("Test get and set company")
+    void testGetAndSetCompany() {
+        // Arrange
+        Employee actualEmployee = new Employee();
+        Company expectedCompany = new Company();
+        expectedCompany.setAllShipments(new HashSet<>());
+        expectedCompany.setCompanyId(UUID.randomUUID());
+        expectedCompany.setCompanyName("kompaniq");
+        expectedCompany.setCustomerList(new HashSet<>());
+        expectedCompany.setEmployees(new HashSet<>());
+        expectedCompany.setOffices(new HashSet<>());
+
+        // Act
+        actualEmployee.setCompany(expectedCompany);
+
+        // Assert
+        assertSame(expectedCompany, actualEmployee.getCompany());
+    }
+
+    @Test
+    @DisplayName("Test get and set employee email")
+    void testGetAndSetEmail() {
+        // Arrange
+        Employee actualEmployee = new Employee();
+        String expectedEmail = "test@abv.bg";
+
+        // Act
+        actualEmployee.setEmail(expectedEmail);
+
+        // Assert
+        assertEquals(expectedEmail, actualEmployee.getEmail());
+    }
+
+    @Test
+    @DisplayName("Test get and set employee ID")
+    void testGetAndSetEmployeeId() {
+        // Arrange
+        Employee actualEmployee = new Employee();
+        UUID expectedEmployeeId = UUID.randomUUID();
+
+        // Act
+        actualEmployee.setEmployeeId(expectedEmployeeId);
+
+        // Assert
+        assertSame(expectedEmployeeId, actualEmployee.getEmployeeId());
+    }
+
+    @Test
+    @DisplayName("Test get and set employee name")
+    void testGetAndSetName() {
+        // Arrange
+        Employee actualEmployee = new Employee();
+        String expectedName = "Pesho";
+
+        // Act
+        actualEmployee.setName(expectedName);
+
+        // Assert
+        assertEquals(expectedName, actualEmployee.getName());
+    }
+
+    @Test
+    @DisplayName("Test get and set office")
+    void testGetAndSetOffice() {
+        // Arrange
         Employee actualEmployee = new Employee();
         Company company = new Company();
         company.setAllShipments(new HashSet<>());
         company.setCompanyId(UUID.randomUUID());
-        company.setCompanyName("kompaniq");
+        company.setCompanyName("kompaniq1");
         company.setCustomerList(new HashSet<>());
         company.setEmployees(new HashSet<>());
         company.setOffices(new HashSet<>());
-        actualEmployee.setCompany(company);
-        actualEmployee.setEmail("test@abv.bg");
-        UUID randomUUIDResult = UUID.randomUUID();
-        actualEmployee.setEmployeeId(randomUUIDResult);
-        actualEmployee.setName("Pesho");
+        Office expectedOffice = new Office();
+        expectedOffice.setCompany(company);
+        expectedOffice.setCompanyOfficeId(UUID.randomUUID());
+        expectedOffice.setOfficeAddress("ulica 1");
+        expectedOffice.setShipments(new HashSet<>());
 
-        Company company1 = new Company();
-        company1.setAllShipments(new HashSet<>());
-        company1.setCompanyId(UUID.randomUUID());
-        company1.setCompanyName("kompaniq1");
-        company1.setCustomerList(new HashSet<>());
-        company1.setEmployees(new HashSet<>());
-        company1.setOffices(new HashSet<>());
-
-        Office office = new Office();
-        office.setCompany(company1);
-        office.setCompanyOfficeId(UUID.randomUUID());
-        office.setOfficeAddress("ulica 1");
-        office.setShipments(new HashSet<>());
-        actualEmployee.setOffice(office);
-        actualEmployee.setPhone("0888888888");
+        // Act
+        actualEmployee.setOffice(expectedOffice);
 
         // Assert
-        assertSame(company, actualEmployee.getCompany());
-        assertEquals("test@abv.bg", actualEmployee.getEmail());
-        assertSame(randomUUIDResult, actualEmployee.getEmployeeId());
-        assertEquals("Pesho", actualEmployee.getName());
-        assertSame(office, actualEmployee.getOffice());
-        assertEquals("0888888888", actualEmployee.getPhone());
+        assertSame(expectedOffice, actualEmployee.getOffice());
+    }
+
+    @Test
+    @DisplayName("Test get and set employee phone")
+    void testGetAndSetPhone() {
+        // Arrange
+        Employee actualEmployee = new Employee();
+        String expectedPhone = "0888888888";
+
+        // Act
+        actualEmployee.setPhone(expectedPhone);
+
+        // Assert
+        assertEquals(expectedPhone, actualEmployee.getPhone());
     }
 }
+
 
