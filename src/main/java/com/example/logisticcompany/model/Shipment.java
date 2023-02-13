@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "shipment")
@@ -27,19 +27,19 @@ public class Shipment {
     @ManyToOne(fetch = FetchType.LAZY)
     private Company company;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "customerId")
     private Customer sender;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     private Customer receiver;
 
     // трябва винаги да е сетнат; всяка пратка тръгва от офис.
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     private Office officeFrom;
 
     // трябва винаги да е сетнат, дори и да имаме адрессТо(ако човек не приеме пратката си, да отиде до офис)
-    @OneToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER, optional = false)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER, optional = false)
     private Office officeTo;
 
     private String addressTo;
@@ -52,5 +52,7 @@ public class Shipment {
 
     public enum status {
         inTransit, arrived, received
-    };
+    }
+
+    ;
 }
