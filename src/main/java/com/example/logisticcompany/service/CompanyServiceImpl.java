@@ -1,5 +1,6 @@
 package com.example.logisticcompany.service;
 
+import com.example.logisticcompany.exceptions.*;
 import com.example.logisticcompany.model.*;
 import com.example.logisticcompany.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,17 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public Company save(Company entity) {
+    public Company save(Company entity) throws CompanyWithThatNameAlreadyExistsException {
+        List<Company> companies = companyRepository.findAll();
+
+        if (companies.size() > 0) {
+            for (Company company : companies) {
+                if (company.getCompanyName().equals(entity.getCompanyName())) {
+                    throw new CompanyWithThatNameAlreadyExistsException("Company with that name already exists!");
+                }
+            }
+        }
+
         return companyRepository.save(entity);
     }
 
@@ -64,32 +75,43 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public Company assignCustomerToCompany(UUID companyId, UUID customerId) throws Exception{
+    public Company assignCustomerToCompany(UUID companyId, UUID customerId) throws CustomerAlreadyExistsInCompanyException {
         Company company = companyRepository.findById(companyId).get();
         Customer customer = customerRepository.findById(customerId).get();
+
+        if (company.getCustomerList().contains(customer)) {
+            throw new CustomerAlreadyExistsInCompanyException("This customer is already registered in the system!");
+        }
+
         customer.getCompanies().add(company);
         company.getCustomerList().add(customer);
         return companyRepository.save(company);
     }
 
     @Override
-    public Company assignOfficeToCompany(UUID companyId, UUID officeId) throws Exception{
+    public Company assignOfficeToCompany(UUID companyId, UUID officeId) throws OfficeAlreadyAssignedToCompanyException {
         Company company = companyRepository.findById(companyId).get();
         Office office = officeRepository.findById(officeId).get();
+
+        if (company.getOffices().contains(office)) {
+            throw new OfficeAlreadyAssignedToCompanyException("This office is already assigned to this company!");
+        }
+
         office.setCompany(company);
         company.getOffices().add(office);
         return companyRepository.save(company);
     }
 
     @Override
-    public Company addShipment(UUID companyId, UUID senderId, UUID receiverId, Shipment shipment) throws Exception {
+    public Company addShipment(UUID companyId, UUID senderId, UUID receiverId, Shipment shipment) throws ShipmentAlreadyRegisteredException {
         Company company = companyRepository.findById(companyId).get();
         Customer sender = customerRepository.findById(senderId).get();
         Customer receiver = customerRepository.findById(receiverId).get();
 
-        if(company.getAllShipments().contains(shipment)){
-            throw new Exception("The provided shipment already exists in the system!");
+        if (company.getAllShipments().contains(shipment)) {
+            throw new ShipmentAlreadyRegisteredException("The provided shipment already exists in the system!");
         }
+
         shipment.setSender(sender);
         shipment.setReceiver(receiver);
         shipment.setCompany(company);
@@ -115,11 +137,12 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public Shipment getShipmentInfo(UUID companyId, UUID shipmentId) throws Exception {
+    public Shipment getShipmentInfo(UUID companyId, UUID shipmentId) throws ShipmentNotFoundException {
         Company company = companyRepository.findById(companyId).get();
         Shipment shipment = shipmentRepository.findById(shipmentId).get();
-        if(!company.getAllShipments().contains(shipment)){
-            throw new Exception("The company does not have the given shipment!");
+
+        if (!company.getAllShipments().contains(shipment)){
+            throw new ShipmentNotFoundException("The company does not have the given shipment!");
         }
 
         return shipment;
@@ -146,9 +169,14 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     @Override
-    public Company assignEmployeeToCompany(UUID companyId, UUID employeeId) {
+    public Company assignEmployeeToCompany(UUID companyId, UUID employeeId) throws EmployeeAlreadyAssignedToCompanyException {
         Company company = companyRepository.findById(companyId).get();
         Employee employee = employeeRepository.findById(employeeId).get();
+
+        if (company.getEmployees().contains(employee)) {
+            throw new EmployeeAlreadyAssignedToCompanyException("This employee is already assigned to the company!");
+        }
+
         employee.setCompany(company);
         company.getEmployees().add(employee);
         return companyRepository.save(company);

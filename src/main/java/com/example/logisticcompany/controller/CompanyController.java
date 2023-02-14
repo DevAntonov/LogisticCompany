@@ -1,5 +1,6 @@
 package com.example.logisticcompany.controller;
 
+import com.example.logisticcompany.exceptions.*;
 import com.example.logisticcompany.model.Company;
 import com.example.logisticcompany.model.Employee;
 import com.example.logisticcompany.model.Office;
@@ -27,7 +28,9 @@ public class CompanyController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCompany(@RequestBody Company company) { companyService.save(company); }
+    public void addCompany(@RequestBody Company company) throws CompanyWithThatNameAlreadyExistsException {
+        companyService.save(company);
+    }
 
     @DeleteMapping("/{companyId}")
     public Optional<Company> getCompanyById(@PathVariable UUID companyId) { return companyService.findById(companyId);}
@@ -40,12 +43,12 @@ public class CompanyController {
 
     //This method just "registers" a customer to the given company
     @PutMapping("/{companyId}/customer/{customerId}")
-    public Company assignCustomerToCompany(@PathVariable UUID companyId, @PathVariable UUID customerId) throws Exception{
+    public Company assignCustomerToCompany(@PathVariable UUID companyId, @PathVariable UUID customerId) throws CustomerAlreadyExistsInCompanyException {
         return companyService.assignCustomerToCompany(companyId, customerId);
     }
 
     @PutMapping("/{companyId}/office/{officeId}")
-    public Company assignOfficeToCompany(@PathVariable UUID companyId, @PathVariable UUID officeId) throws Exception{
+    public Company assignOfficeToCompany(@PathVariable UUID companyId, @PathVariable UUID officeId) throws OfficeAlreadyAssignedToCompanyException {
         return companyService.assignOfficeToCompany(companyId, officeId);
     }
 
@@ -55,7 +58,7 @@ public class CompanyController {
     }
 
     @PutMapping("/{companyId}/employee/{employeeId}")
-    public Company assignEmployeeToCompany(@PathVariable UUID companyId, @PathVariable UUID employeeId) throws Exception{
+    public Company assignEmployeeToCompany(@PathVariable UUID companyId, @PathVariable UUID employeeId) throws EmployeeAlreadyAssignedToCompanyException {
         return companyService.assignEmployeeToCompany(companyId, employeeId);
     }
 
@@ -66,12 +69,12 @@ public class CompanyController {
 
     //This method will register the provided customers to the company as well as adding the shipment
     @PutMapping("/{companyId}/sender/{senderId}/receiver/{receiverId}")
-    public Company addShipment(@PathVariable UUID companyId, @PathVariable UUID senderId, @PathVariable UUID receiverId, @RequestBody Shipment shipment) throws Exception{
+    public Company addShipment(@PathVariable UUID companyId, @PathVariable UUID senderId, @PathVariable UUID receiverId, @RequestBody Shipment shipment) throws ShipmentAlreadyRegisteredException {
         return companyService.addShipment(companyId, senderId, receiverId, shipment);
     }
 
     @GetMapping("/{companyId}/shipment/{shipmentId}")
-    public Shipment getShipmentInfo(@PathVariable UUID companyId, @PathVariable UUID shipmentId) throws Exception { return companyService.getShipmentInfo(companyId, shipmentId);}
+    public Shipment getShipmentInfo(@PathVariable UUID companyId, @PathVariable UUID shipmentId) throws ShipmentNotFoundException { return companyService.getShipmentInfo(companyId, shipmentId);}
     @GetMapping("/{companyId}/customer")
     public Set<Customer> getCompanyCustomers(@PathVariable UUID companyId) throws Exception{
         return companyService.getCompanyCustomers(companyId);

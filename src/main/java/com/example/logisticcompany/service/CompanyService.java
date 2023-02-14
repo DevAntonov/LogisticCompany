@@ -1,5 +1,6 @@
 package com.example.logisticcompany.service;
 
+import com.example.logisticcompany.exceptions.*;
 import com.example.logisticcompany.model.Company;
 import com.example.logisticcompany.model.Employee;
 import com.example.logisticcompany.model.Office;
@@ -15,7 +16,7 @@ public interface CompanyService {
 
     public Optional<Company> findById(UUID id);
 
-    public Company save(Company entity);
+    public Company save(Company entity) throws CompanyWithThatNameAlreadyExistsException;
 
     public Iterable<Company> saveAll(Iterable<Company> items);
 
@@ -23,20 +24,20 @@ public interface CompanyService {
 
     public void deleteById(UUID id);
 
-    public Company assignCustomerToCompany(UUID companyId, UUID customerId) throws Exception;
+    public Company assignCustomerToCompany(UUID companyId, UUID customerId) throws CustomerAlreadyExistsInCompanyException;
 
     // add an existing office entity to the company
-    public Company assignOfficeToCompany(UUID companyId, UUID officeId) throws Exception;
+    public Company assignOfficeToCompany(UUID companyId, UUID officeId) throws OfficeAlreadyAssignedToCompanyException;
 
-    public Company addShipment(UUID companyId, UUID senderId, UUID receiverId, Shipment shipment) throws Exception;
+    public Company addShipment(UUID companyId, UUID senderId, UUID receiverId, Shipment shipment) throws ShipmentAlreadyRegisteredException;
 
-    public Shipment getShipmentInfo(UUID companyId, UUID shipmentId) throws Exception;
+    public Shipment getShipmentInfo(UUID companyId, UUID shipmentId) throws ShipmentNotFoundException;
 
     public Set<Office> getCompanyOffices(UUID companyId) throws Exception;
 
     public void calculatePrice(Shipment shipment);
 
-    public Company assignEmployeeToCompany(UUID companyId, UUID employeeId);
+    public Company assignEmployeeToCompany(UUID companyId, UUID employeeId) throws EmployeeAlreadyAssignedToCompanyException;
 
     public Set<Employee> getCompanyEmployees(UUID companyId);
 

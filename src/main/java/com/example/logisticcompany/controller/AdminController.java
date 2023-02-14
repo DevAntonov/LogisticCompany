@@ -1,5 +1,6 @@
 package com.example.logisticcompany.controller;
 
+import com.example.logisticcompany.exceptions.CompanyWithThatNameAlreadyExistsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,14 +37,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/admin/company"}, method = RequestMethod.POST)
-    public String adminAddCompany(Model model, @Valid Company company, BindingResult bindingResult){
-
-//        if(bindingResult.hasErrors()){
-//            model.addAttribute("successMessage", "User registered successfully!");
-//            model.addAttribute("bindingResult", bindingResult);
-//            return "admin/dashboard";
-//        }
-
+    public String adminAddCompany(Model model, @Valid Company company, BindingResult bindingResult) throws CompanyWithThatNameAlreadyExistsException{
         companyService.save(company);
 
         return "admin/dashboard";
