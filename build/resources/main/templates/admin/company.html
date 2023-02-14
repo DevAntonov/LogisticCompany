@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Company</title>
+    </head>
+    <body>
+        <ul th:each="comp : ${companies}">
+            <a th:href="@{|/company/${comp.getCompanyId()}|}" th:text="${comp}"></a>
+            <a th:href="@{|/company/delete/${comp.getCompanyId()}|}" th:text="delete"></a>
+        </ul>
+        <form th:action="@{/admin/company}" th:object="${company}" method="post">
+            <h3>Add company</h3>
+            <input type="text" th:field="*{companyName}" placeholder="Company Name" /> <br/><br/>
+            <button type="submit">Add company</button> | <a th:href="@{|/admin/dashboard|}" th:text="'Dashboard'"></a>
+        <!--    <span th:utext="${successMessage}"></span>-->
+        <!--    <div th:if="${bindingResult!=null && bindingResult.getAllErrors()!=null}">-->
+        <!--        <ul th:each="data : ${bindingResult.getAllErrors()}">-->
+        <!--            <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>-->
+        <!--        </ul>-->
+        <!--    </div>-->
+        </form>
+    </body>
+</html>

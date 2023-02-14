@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.logisticcompany.model.ShipmentTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2023-02-13T22:11:38" hostname="VIKTORG14" time="0.036">
+  <properties/>
+  <testcase name="Test setOfficeFrom" classname="com.example.logisticcompany.model.ShipmentTest" time="0.019"/>
+  <testcase name="Test setPrice" classname="com.example.logisticcompany.model.ShipmentTest" time="0.003"/>
+  <testcase name="Test setReceiver" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setOfficeTo" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setCompany" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setShipmentId" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setAddressTo" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setSender" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <testcase name="Test setWeight" classname="com.example.logisticcompany.model.ShipmentTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

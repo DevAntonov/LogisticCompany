@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Register</title>
+  <link rel="icon" href="/images/logcpy-favicon.ico" type="image/x-icon" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"/>
+  <link rel="stylesheet" href="/css/mdb.min.css" />
+  <link rel="stylesheet" href="/css/main.css" />
+</head>
+<body>
+<main>
+  <form th:action="@{/register}" th:object="${user}" method="post" class="form-reg">
+    <!-- 2 column grid layout with text inputs for the first and last names -->
+    <h3 class="mb-4">Registration</h3>
+
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" th:field="*{firstName}" placeholder="First Name" id="first-name" class="form-control" />
+          <label class="form-label" for="first-name">First name</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <input type="text" th:field="*{lastName}" placeholder="Last Name" id="last-name" class="form-control" />
+          <label class="form-label" for="last-name">Last name</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col">
+        <div class="form-outline">
+          <input type="text"th:field="*{mobile}" placeholder="Mobile Number" id="mobile-number" class="form-control" />
+          <label class="form-label" for="mobile-number">Mobile Number</label>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-outline">
+          <select th:field="*{role}" required class="select form-control select-input active">
+            <option value="">Select</option>
+            <option value="ADMIN">ADMIN</option>
+            <option value="CLIENT">CLIENT</option>
+            <option value="USER">USER</option>
+            <option value="COURIER">COURIER</option>
+            <option value="OFFICEWORKER">OFFICE WORKER</option>
+          </select>
+          <label class="form-label select-label">Select Role</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Email input -->
+    <div class="form-outline mb-4">
+      <input type="email" th:field="*{email}" placeholder="Email" id="email-address" class="form-control active" />
+      <label class="form-label" for="email-address">Email address</label>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-outline mb-4">
+      <input type="password" th:field="*{password}" placeholder="Password" id="password" class="form-control active" />
+      <label class="form-label" for="password">Password</label>
+    </div>
+
+    <div class="row mb-4 reg-submit">
+      <div class="col">
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block" >Register</button>
+      </div>
+
+      <div class="col-2">
+         <a th:href="@{|/login|}" th:text="'Log in'"></a>
+      </div>
+    </div>
+    <span th:utext="${successMessage}"></span>
+    <div th:if="${bindingResult!=null && bindingResult.getAllErrors()!=null}">
+      <ul th:each="data : ${bindingResult.getAllErrors()}">
+        <li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+      </ul>
+    </div>
+    <!-- Register buttons -->
+  </form>
+</main>
+  <footer>
+    <script type="text/javascript" src="/js/mdb.min.js"></script>
+    <!-- Custom scripts -->
+    <script type="text/javascript"></script>
+  </footer>
+</body>
+</html>
